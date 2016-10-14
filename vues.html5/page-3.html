@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+body{
+padding: 10px;
+}
+
+div{
+width:500px;}
+h2{
+clear: both;
+font-size:160%;
+font-weight: normal;
+padding-top: 10px;
+padding-bottom: 15px;
+}
+.lien{
+text-decoration:none;
+color:black;
+}
+img{
+border: 1px solid black;}
+
+li{
+list-style:none;
+float:left;
+display: inline;
+margin-right:5px;
+margin-bottom:5px;
+}
+#zoom{
+position: absolute;
+border: 1px solid #333;
+background: #333;
+padding: 3px;
+display:none;
+color:#fff;}
+</style>
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script>
+$(document).ready(initialisations);
+
+function initialisations(){
+	xOffset=20;
+	yOffset=10;
+	
+	$("a.lien").mouseenter(entreeSourisSurLien);
+	$("a.lien").mouseleave(sortieSourisDuLien);
+	$("a.lien").mousemove(deplacementSouris);
+};
+function entreeSourisSurLien(e){
+	
+	this.texte=this.title;
+	this.title="";
+	var legende= (this.texte == "")?"":"<br/>"+this.texte;
+	$("body").append("<p id='zoom'><img src='" +this.href +"' alt='Visualisation image'/>"+ legende +"</p>");
+	$("#zoom").css("top", (e.pageY - yOffset)+"px");
+	$("#zoom").css("left", (e.pageX + xOffset)+"px");
+	$("#zoom").fadeIn("slow");
+};
+
+function sortieSourisDuLien(){
+	this.title = this.texte;
+	$("#zoom").remove();
+};
+
+function deplacementSouris(e){
+	$("#zoom").css("top",(e.pageY - yOffset)+"px");
+	$("#zoom").css("left",(e.pageX + XOffset)+"px");
+};
+</script>
+</head>
+<body>
+	<div>
+	<h2> Effet de zoom avec legende</h2>
+	<ul>
+		<li><a href="../photos/photo1.jpg" class="lien" title="Desert">
+		<img alt="Desert" src="../photos-miniatures/photo1.jpg"/></a></li>
+		<li><a href="../photos/photo2.jpg" class="lien" title="Koala">
+		<img alt="Koala" src="../photos-miniatures/photo2.jpg"/></a></li>
+		<li><a href="../photos/photo3.jpg" class="lien" title="manchots">
+		<img alt="manchots" src="../photos-miniatures/photo3.jpg"/></a></li>
+		<li><a href="../photos/photo4.jpg" class="lien" title="phare">
+		<img alt="phare" src="../photos-miniatures/photo4.jpg"/></a></li>
+		<li><a href="../photos/photo5.jpg" class="lien" title="meduse">
+		<img alt="meduse" src="../photos-miniatures/photo5.jpg"/></a></li>
+		<li><a href="../photos/photo6.jpg" class="lien" title="hortensia">
+		<img alt="hortensia" src="../photos-miniatures/photo6.jpg"/></a></li>
+		<li><a href="../photos/photo7.jpg" class="lien" title="tulipe">
+		<img alt="tulipe" src="../photos-miniatures/photo7.jpg"/></a></li>
+		<li><a href="../photos/photo8.jpg" class="lien" title="chrysantheme">
+		<img alt="chrysantheme" src="../photos-miniatures/photo8.jpg"/></a></li>
+	</ul>
+	</div>
+</body>
+</html>
